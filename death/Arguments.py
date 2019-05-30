@@ -57,7 +57,7 @@ class Arguments:
 	## @param[in] self Class handle
 	## @param[in] start_position_parsing position to start the parsing in the arguments
 	##
-	def parse(self, start_position_parsing=1):
+	def parse(self, start_position_parsing=1, have_unknow_argument=False):
 		list_argument = [] # composed of list element
 		not_parse_next_element=False
 		for iii in range(start_position_parsing, len(sys.argv)):
@@ -125,7 +125,8 @@ class Arguments:
 							argument_found = True
 						break;
 				if argument_found == False:
-					debug.error("UNKNOW argument : '" + argument + "'")
+					if have_unknow_argument == False:
+						debug.error("UNKNOW argument : '" + argument + "'")
 			elif option[:1]=="-":
 				# small argument
 				for prop in self.list_properties:
